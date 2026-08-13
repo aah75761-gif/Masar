@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Masar | مسار</title>
+<style>
+:root{--bg:#0d0d0e;--panel:#171719;--panel2:#202023;--line:#303034;--text:#f7f7f7;--muted:#9b9b9f;--soft:#d9d9dc;--accent:#fff}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at top,#222 0,#0d0d0e 38%);color:var(--text);font-family:Tahoma,Arial,sans-serif}
+button,input,select,textarea{font:inherit}button{cursor:pointer}.app{display:grid;grid-template-columns:240px 1fr;min-height:100vh}.side{border-left:1px solid var(--line);background:#121214;padding:22px 16px;position:sticky;top:0;height:100vh}.brand{font-weight:900;font-size:22px;margin:4px 8px 30px}.brand span{color:#777}.nav button{display:block;width:100%;text-align:right;border:1px solid transparent;background:transparent;color:#aaa;padding:13px 14px;border-radius:12px;margin:5px 0}.nav button.active,.nav button:hover{background:#222;color:#fff;border-color:#333}.tip{position:absolute;bottom:20px;left:16px;right:16px;background:#1d1d20;border:1px solid #333;padding:14px;border-radius:14px;color:#aaa;font-size:12px;line-height:1.7}
+main{padding:24px;max-width:1250px;width:100%;margin:auto}.top{display:flex;justify-content:space-between;gap:15px;align-items:center;margin-bottom:20px}.welcome h1{margin:0;font-size:27px}.welcome p{margin:7px 0;color:var(--muted)}.datebox{background:#18181a;border:1px solid var(--line);padding:12px 15px;border-radius:13px;color:#ccc;text-align:center;font-size:13px}
+.cards{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}.card{background:linear-gradient(145deg,#1b1b1e,#151517);border:1px solid var(--line);border-radius:17px;padding:17px}.metric{color:#999;font-size:12px}.metric b{display:block;font-size:27px;color:#fff;margin-top:7px}.progress{height:8px;background:#303033;border-radius:20px;margin-top:13px;overflow:hidden}.fill{height:100%;background:#eee;width:0;transition:.3s}.layout{display:grid;grid-template-columns:1.3fr .7fr;gap:15px;margin-top:15px}.section{margin-top:15px}.head{display:flex;justify-content:space-between;align-items:center;margin-bottom:13px}.head h2{font-size:18px;margin:0}.muted{color:var(--muted);font-size:12px}.timer{text-align:center}.ring{width:210px;height:210px;border-radius:50%;margin:10px auto 17px;display:grid;place-items:center;background:conic-gradient(#eee var(--p),#303033 0);position:relative}.ring:after{content:"";position:absolute;width:184px;height:184px;background:#151517;border-radius:50%}.time{position:relative;z-index:2;font-size:48px;font-weight:900;letter-spacing:1px}.timerMode{color:#aaa}.timerBtns{display:flex;justify-content:center;gap:8px;flex-wrap:wrap}.btn{border:1px solid #444;background:#f3f3f3;color:#111;border-radius:11px;padding:10px 15px;font-weight:800}.btn.dark{background:#29292c;color:#fff}.btn.icon{padding:9px 11px}.presets{display:flex;gap:6px;justify-content:center;margin:13px 0}.presets button{font-size:12px;padding:7px 10px}.task{display:flex;gap:11px;align-items:center;background:#202023;border:1px solid #303034;border-radius:13px;padding:12px;margin:8px 0}.check{width:22px;height:22px;border:1px solid #666;border-radius:6px;display:grid;place-items:center;flex:none;cursor:pointer}.task.done{opacity:.45}.task.done .taskTitle{text-decoration:line-through}.taskBody{flex:1}.taskTitle{font-weight:800}.meta{font-size:11px;color:#929296;margin-top:5px}.priority{font-size:10px;border:1px solid #555;padding:4px 7px;border-radius:20px;color:#ccc}.delete{background:transparent;color:#888;border:0}.empty{text-align:center;padding:28px;color:#666}
+form{display:grid;grid-template-columns:1fr 1fr;gap:9px}input,select,textarea{background:#101012;color:#fff;border:1px solid #38383d;border-radius:10px;padding:11px;width:100%;outline:none}input:focus,select:focus,textarea:focus{border-color:#777}textarea{min-height:76px;resize:vertical}.full{grid-column:1/-1}.calendar{display:grid;grid-template-columns:repeat(7,1fr);gap:6px}.day{min-height:72px;border:1px solid #303034;border-radius:10px;background:#1b1b1e;padding:7px}.day .n{font-size:11px;color:#aaa}.day.today{border-color:#eee}.dot{display:inline-block;width:6px;height:6px;border-radius:50%;background:#ddd;margin:2px}.listTitle{display:flex;gap:7px;align-items:center}.filter{display:flex;gap:7px}.filter button{font-size:11px;padding:7px 10px;border-radius:9px;border:1px solid #38383d;background:#202023;color:#aaa}.filter button.active{background:#eee;color:#111}
+@media(max-width:950px){.app{grid-template-columns:1fr}.side{height:auto;position:relative;border-left:0;border-bottom:1px solid #29292c}.nav{display:flex;gap:5px;overflow:auto}.nav button{white-space:nowrap;width:auto}.tip{display:none}.cards{grid-template-columns:repeat(2,1fr)}.layout{grid-template-columns:1fr}}
+@media(max-width:560px){main{padding:14px}.cards{grid-template-columns:1fr 1fr}.top{align-items:flex-start}.datebox{font-size:10px}.welcome h1{font-size:21px}.ring{width:180px;height:180px}.ring:after{width:156px;height:156px}.time{font-size:40px}form{grid-template-columns:1fr}}
+.celebrate{position:fixed;inset:0;background:#000b;display:none;place-items:center;z-index:99}.celebrate.show{display:grid}.celebrateBox{background:#19191c;border:1px solid #555;border-radius:22px;padding:30px;text-align:center;box-shadow:0 20px 80px #000}.celebrateBox .emoji{font-size:58px}.celebrateBox h2{margin:10px 0}.confetti{position:absolute;inset:0;overflow:hidden;pointer-events:none}.confetti i{position:absolute;width:8px;height:18px;background:#eee;animation:fall 1.4s linear forwards}@keyframes fall{from{transform:translateY(-20px) rotate(0)}to{transform:translateY(100vh) rotate(540deg);opacity:0}}.details{display:flex;gap:5px;flex-wrap:wrap;margin-top:7px}.tag{background:#2b2b2e;border:1px solid #3b3b40;border-radius:7px;padding:4px 7px;font-size:10px;color:#bbb}.subjectHead{font-size:11px;color:#aaa;margin-bottom:4px}.calDone{font-size:10px;color:#eee;margin-top:5px}.doneMark{font-size:10px;background:#eee;color:#111;border-radius:8px;padding:3px 6px} </style>
+</head>
+<body>
+<div class="app">
+<aside class="side">
+ <div class="brand">MASAR <span>مسار</span></div>
+ <div class="nav">
+  <button class="active" onclick="showTab('home',this)">⌂ الرئيسية</button>
+  <button onclick="showTab('tasksTab',this)">✓ المهام</button>
+  <button onclick="showTab('calendarTab',this)">▦ التقويم</button>
+  <button onclick="showTab('statsTab',this)">◒ الإحصائيات</button>
+ </div>
+ <div class="tip">نصيحة اليوم<br>ابدأ بمهمة واحدة فقط، وأغلق المشتتات أثناء المؤقت.</div>
+</aside>
+
+<main>
+<div class="top"><div class="welcome"><h1>مرحباً بك 👋</h1><p id="greeting">جاهز لجلسة دراسة جديدة؟</p></div><div class="datebox" id="now"></div></div>
+
+<div id="home" class="tab">
+ <div class="cards">
+  <div class="card"><div class="metric">مهام اليوم</div><div class="metric"><b id="total">0</b></div></div>
+  <div class="card"><div class="metric">المكتملة</div><div class="metric"><b id="done">0</b></div></div>
+  <div class="card"><div class="metric">وقت الدراسة</div><div class="metric"><b id="minutes">0 د</b></div></div>
+  <div class="card"><div class="metric">إنجاز اليوم</div><div class="metric"><b id="percent">0%</b></div><div class="progress"><div class="fill" id="progress"></div></div></div>
+ </div>
+
+ <div class="layout">
+  <section class="card timer">
+   <div class="head"><h2>مؤقت التركيز</h2><span class="muted" id="sessionCount">0 جلسات</span></div>
+   <div class="ring" id="ring"><div><div class="timerMode" id="mode">دراسة</div><div class="time" id="clock">50:00</div></div></div>
+   <div class="presets"><button class="btn dark" onclick="setTimer(25)">25</button><button class="btn dark" onclick="setTimer(50)">50</button><button class="btn dark" onclick="setTimer(90)">90</button><button class="btn dark" onclick="setBreak()">10 استراحة</button></div>
+   <div class="timerBtns"><button class="btn" id="start" onclick="startTimer()">ابدأ</button><button class="btn dark" onclick="pauseTimer()">إيقاف</button><button class="btn dark" onclick="resetTimer()">إعادة ضبط</button></div>
+   <div class="muted" style="margin-top:12px" id="timerMsg">عند انتهاء جلسة الدراسة تُضاف الدقائق تلقائياً.</div>
+  </section>
+
+  <section class="card">
+   <div class="head"><h2>إضافة مهمة</h2><span class="muted">لليوم أو أي تاريخ</span></div>
+   <form id="form">
+    <select id="subject" required><option value="">اختر المادة</option><option>رياضيات</option><option>فيزياء</option><option>كيمياء</option><option>أحياء</option><option>إنكليزي</option><option>عربي</option><option>إسلامية</option><option>مادة أخرى</option></select>
+    <input id="title" placeholder="اسم المهمة — مثال: الفصل الثالث" required>
+    <input id="date" type="date" required>
+    <input id="lectures" type="number" min="0" placeholder="عدد المحاضرات">
+    <select id="priority"><option>عالية</option><option selected>متوسطة</option><option>منخفضة</option></select>
+    <textarea id="notes" class="full" placeholder="تفاصيل المهمة أو ملاحظاتك"></textarea>
+    <button class="btn full">+ إضافة المهمة</button>
+   </form>
+  </section>
+ </div>
+
+ <section class="card section">
+  <div class="head"><h2>مهام اليوم</h2><div class="filter"><button class="active" onclick="setFilter('all',this)">الكل</button><button onclick="setFilter('open',this)">المتبقية</button><button onclick="setFilter('done',this)">المنجزة</button></div></div>
+  <div id="todayTasks"></div>
+ </section>
+</div>
+
+<div id="tasksTab" class="tab" style="display:none">
+ <section class="card"><div class="head"><h2>كل المهام</h2><span class="muted" id="allCount"></span></div><div id="allTasks"></div></section>
+</div>
+
+<div id="calendarTab" class="tab" style="display:none">
+ <section class="card"><div class="head"><button class="btn dark" onclick="changeMonth(-1)">‹</button><h2 id="monthTitle"></h2><button class="btn dark" onclick="changeMonth(1)">›</button></div><div class="calendar" id="calendar"></div></section>
+</div>
+
+<div id="statsTab" class="tab" style="display:none">
+ <div class="cards">
+  <div class="card"><div class="metric">إجمالي الدقائق</div><div class="metric"><b id="sMinutes">0</b></div></div>
+  <div class="card"><div class="metric">إجمالي الجلسات</div><div class="metric"><b id="sSessions">0</b></div></div>
+  <div class="card"><div class="metric">كل المهام</div><div class="metric"><b id="sTasks">0</b></div></div>
+  <div class="card"><div class="metric">مكتملة</div><div class="metric"><b id="sDone">0</b></div></div>
+ </div>
+ <section class="card section"><h2>ملخص الأداء</h2><p class="muted">استمر يومياً. الهدف ليس عدد الساعات فقط، بل إكمال المهام المهمة.</p><div class="progress" style="height:14px"><div class="fill" id="allProgress"></div></div><div class="muted" id="allProgressText" style="margin-top:9px"></div></section>
+</div>
+</main>
+</div>
+
+<script>
+const $=x=>document.getElementById(x);
+let tasks=JSON.parse(localStorage.getItem('study_pro_tasks')||'[]');
+let stats=JSON.parse(localStorage.getItem('study_pro_stats')||'{"minutes":0,"sessions":0}');
+let seconds=3000,totalSeconds=3000,timer=null,running=false,filter='all',calDate=new Date();
+
+const today=()=>new Date().toISOString().slice(0,10);
+const save=()=>{localStorage.setItem('study_pro_tasks',JSON.stringify(tasks));localStorage.setItem('study_pro_stats',JSON.stringify(stats))};
+const esc=s=>String(s??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]));
+function updateNow(){let d=new Date();$('now').innerHTML=d.toLocaleDateString('ar-IQ',{weekday:'long',day:'numeric',month:'long'})+'<br>'+d.toLocaleTimeString('ar-IQ',{hour:'2-digit',minute:'2-digit'});$('greeting').textContent=d.getHours()<12?'صباح الخير، وقت ممتاز للإنجاز.':d.getHours()<18?'يومك مستمر، أنجز المهمة التالية.':'مساء الإنجاز، ركّز على أهم مهمة.'}
+function render(){
+ let t=today(), list=tasks.filter(x=>x.date===t), done=list.filter(x=>x.done).length;
+ if(filter==='open')list=list.filter(x=>!x.done);if(filter==='done')list=list.filter(x=>x.done);
+ $('todayTasks').innerHTML=list.length?list.sort((a,b)=>(a.time||'99:99').localeCompare(b.time||'99:99')).map(taskHTML).join(''):'<div class="empty">لا توجد مهام هنا.</div>';
+ $('total').textContent=tasks.filter(x=>x.date===t).length;$('done').textContent=done;$('minutes').textContent=stats.minutes+' د';let p=tasks.filter(x=>x.date===t).length?Math.round(done/tasks.filter(x=>x.date===t).length*100):0;$('percent').textContent=p+'%';$('progress').style.width=p+'%';$('sessionCount').textContent=stats.sessions+' جلسات';
+ $('allTasks').innerHTML=tasks.length?tasks.sort((a,b)=>a.date.localeCompare(b.date)|| (a.time||'').localeCompare(b.time||'')).map(taskHTML).join(''):'<div class="empty">لا توجد مهام.</div>';$('allCount').textContent=tasks.length+' مهمة';
+ $('sMinutes').textContent=stats.minutes+' د';$('sSessions').textContent=stats.sessions;$('sTasks').textContent=tasks.length;$('sDone').textContent=tasks.filter(x=>x.done).length;let ap=tasks.length?Math.round(tasks.filter(x=>x.done).length/tasks.length*100):0;$('allProgress').style.width=ap+'%';$('allProgressText').textContent=ap+'% من جميع المهام مكتملة';
+ renderCalendar();
+}
+function taskHTML(x){
+ let details=[];
+ if(x.lectures>0)details.push('🎥 '+x.lectures+' محاضرة');
+ return `<div class="task ${x.done?'done':''}">
+ <div class="check" onclick="toggleTask('${x.id}')">${x.done?'✓':''}</div>
+ <div class="taskBody">
+  <div class="subjectHead">${esc(x.subject)}</div>
+  <div class="taskTitle">${esc(x.title)}</div>
+  <div class="details">${details.map(d=>`<span class="tag">${d}</span>`).join('')}</div>
+  <div class="meta">${x.date}${x.notes?' · '+esc(x.notes):''}</div>
+ </div>
+ ${x.done?'<span class="doneMark">مكتملة ✓</span>':''}
+ <span class="priority">${esc(x.priority)}</span><button class="delete" onclick="delTask('${x.id}')">حذف</button>
+ </div>`
+}
+function toggleTask(id){let x=tasks.find(x=>x.id===id);let was=x.done;x.done=!x.done;save();render();if(!was)celebrate()}
+function delTask(id){tasks=tasks.filter(x=>x.id!==id);save();render()}
+function setFilter(f,b){filter=f;document.querySelectorAll('.filter button').forEach(x=>x.classList.remove('active'));b.classList.add('active');render()}
+$('form').onsubmit=e=>{e.preventDefault();tasks.push({
+ id:Date.now().toString(),subject:$('subject').value,title:$('title').value,date:$('date').value,
+ lectures:$('lectures').value,
+ priority:$('priority').value,notes:$('notes').value,done:false
+});save();e.target.reset();$('date').value=today();render();showTab('home',document.querySelector('.nav button'))}
+
+function celebrate(){
+ $('celebrate').classList.add('show');let c=$('confetti');c.innerHTML='';
+ for(let i=0;i<45;i++){let e=document.createElement('i');e.style.left=Math.random()*100+'%';e.style.top=(-Math.random()*20)+'px';e.style.animationDelay=Math.random()*.5+'s';e.style.transform='rotate('+Math.random()*360+'deg)';c.appendChild(e)}
+}
+function closeCelebrate(){$('celebrate').classList.remove('show');$('confetti').innerHTML=''}
+
+function fmt(s){return String(Math.floor(s/60)).padStart(2,'0')+':'+String(s%60).padStart(2,'0')}
+function paint(){ $('clock').textContent=fmt(seconds);let p=(1-seconds/totalSeconds)*100;$('ring').style.setProperty('--p',p+'%')}
+function setTimer(m){pauseTimer();seconds=totalSeconds=m*60;$('mode').textContent='دراسة';$('timerMsg').textContent='عند انتهاء جلسة الدراسة تُضاف الدقائق تلقائياً.';paint()}
+function setBreak(){pauseTimer();seconds=totalSeconds=600;$('mode').textContent='استراحة';$('timerMsg').textContent='استراحة قصيرة. لا تُحسب ضمن وقت الدراسة.';paint()}
+function startTimer(){if(running)return;running=true;$('start').textContent='يعمل...';timer=setInterval(()=>{seconds--;paint();if(seconds<=0){clearInterval(timer);timer=null;running=false;$('start').textContent='ابدأ';if($('mode').textContent==='دراسة'){stats.minutes+=Math.round(totalSeconds/60);stats.sessions++;save();render();alert('انتهت جلسة الدراسة 🎉');setBreak()}else{alert('انتهت الاستراحة. وقت العودة للدراسة.');setTimer(50)}}},1000)}
+function pauseTimer(){if(timer)clearInterval(timer);timer=null;running=false;$('start').textContent='استئناف'}
+function resetTimer(){pauseTimer();setTimer(50)}
+
+function showTab(id,b){document.querySelectorAll('.tab').forEach(x=>x.style.display='none');$(id).style.display='block';document.querySelectorAll('.nav button').forEach(x=>x.classList.remove('active'));b.classList.add('active')}
+function changeMonth(n){calDate.setMonth(calDate.getMonth()+n);renderCalendar()}
+function renderCalendar(){
+ let y=calDate.getFullYear(),m=calDate.getMonth();
+ $('monthTitle').textContent=new Date(y,m,1).toLocaleDateString('ar-IQ',{month:'long',year:'numeric'});
+ let first=new Date(y,m,1).getDay();first=(first+6)%7;let days=new Date(y,m+1,0).getDate();
+ let names=['الإث','الثلا','الأرب','الخمي','الجمع','السبت','الأحد'];
+ let h=names.map(n=>`<div class="day" style="min-height:auto;background:#121214;color:#888">${n}</div>`).join('');
+ for(let i=0;i<first;i++)h+='<div></div>';
+ for(let d=1;d<=days;d++){
+  let key=new Date(y,m,d).toISOString().slice(0,10), list=tasks.filter(x=>x.date===key), c=list.length, done=list.filter(x=>x.done).length,cl=key===today()?' today':'';
+  h+=`<div class="day${cl}"><div class="n">${d}</div>${c?'<div>'+Array(Math.min(c,5)).fill('<span class="dot"></span>').join('')+'</div>':''}${done?`<div class="calDone">✓ ${done} من ${c} مكتملة</div>`:''}</div>`
+ }
+ $('calendar').innerHTML=h
+}
+$('date').value=today();updateNow();setInterval(updateNow,1000);paint();render();
+</script>
+<div class="celebrate" id="celebrate"><div class="confetti" id="confetti"></div><div class="celebrateBox"><div class="emoji">🎉</div><h2>أحسنت!</h2><p>تم إنجاز المهمة بنجاح</p><button class="btn" onclick="closeCelebrate()">متابعة المسار</button></div></div>
+</body></html>
