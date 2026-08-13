@@ -45,7 +45,7 @@ button{cursor:pointer}
 .nav button{display:flex;align-items:center;gap:10px;width:100%;text-align:right;border:1px solid transparent;background:transparent;color:var(--muted);padding:12px 14px;border-radius:12px;margin:4px 0;font-weight:600;transition:.2s}
 .nav button.active,.nav button:hover{background:var(--panel2);color:var(--text);border-color:var(--line)}
 .side-footer{border-top:1px solid var(--line);padding-top:15px;font-size:12px;color:var(--muted)}
-.designer-tag{margin-top:8px;font-size:11px;font-weight:700;color:var(--accent);display:flex;align-items:center;gap:5px}
+.designer-tag{margin-top:8px;font-size:12px;font-weight:800;color:var(--accent);display:flex;align-items:center;gap:5px}
 main{padding:28px;max-width:1300px;width:100%;margin:auto}
 .top{display:flex;justify-content:space-between;gap:15px;align-items:center;margin-bottom:24px}
 .welcome h1{margin:0;font-size:26px;color:var(--text)}
@@ -97,8 +97,6 @@ textarea{min-height:80px;resize:vertical}
 .filter{display:flex;gap:6px}
 .filter button{font-size:11px;padding:6px 12px;border-radius:8px;border:1px solid var(--line);background:var(--panel2);color:var(--muted)}
 .filter button.active{background:var(--accent);color:#ffffff;border-color:var(--accent);font-weight:bold}
-.sound-box{display:flex;gap:10px;margin-top:15px;background:var(--panel2);padding:10px;border-radius:12px;border:1px solid var(--line);align-items:center;justify-content:space-between}
-.sound-box select{padding:6px;width:auto;font-size:12px}
 
 /* Celebration Overlay */
 .celebrate-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.5);display:none;place-items:center;z-index:999;backdrop-filter:blur(3px)}
@@ -171,7 +169,7 @@ canvas#confettiCanvas{position:fixed;inset:0;pointer-events:none;z-index:1000}
  <div class="side-footer">
    <div style="font-weight:bold;margin-bottom:4px">مسار الطالب الذكي 🎓</div>
    <div>نظّم وقتك، أنجز مهامك، وحقق هدفك.</div>
-   <div class="designer-tag">✨ تصميم وتطوير: أمير أحمد</div>
+   <div class="designer-tag">أمير أحمد</div>
  </div>
 </aside>
 
@@ -200,15 +198,6 @@ canvas#confettiCanvas{position:fixed;inset:0;pointer-events:none;z-index:1000}
      <button class="btn dark" id="start" onclick="startTimer()">ابدأ الجلسة</button>
      <button class="btn" onclick="pauseTimer()">إيقاف</button>
      <button class="btn" onclick="resetTimer()">إعادة ضبط</button>
-   </div>
-   
-   <div class="sound-box">
-     <span class="muted">🎧 صوت التركيز:</span>
-     <select id="audioSelect" onchange="toggleAudio(this.value)">
-       <option value="none">مُغلق</option>
-       <option value="white">ضوضاء بيضاء ⚪</option>
-       <option value="pink">ضوضاء وردية (أهدأ) 🌸</option>
-     </select>
    </div>
   </section>
 
@@ -283,7 +272,7 @@ let tasks=JSON.parse(localStorage.getItem('study_pro_tasks')||'[]');
 let stats=JSON.parse(localStorage.getItem('study_pro_stats')||'{"minutes":0,"sessions":0,"streak":0,"lastActive":""}');
 let seconds=3000,totalSeconds=3000,timer=null,running=false,filter='all',calDate=new Date();
 
-// إعداد الثيم الألوان
+// إعداد ثيم الألوان
 function changeTheme(theme){
   if(theme==='default') document.documentElement.removeAttribute('data-theme');
   else document.documentElement.setAttribute('data-theme', theme);
@@ -292,54 +281,6 @@ function changeTheme(theme){
 let currentTheme = localStorage.getItem('study_theme')||'default';
 changeTheme(currentTheme);
 if($('themeSelect')) $('themeSelect').value = currentTheme;
-
-// الصوت
-let audioCtx = null, noiseNode = null;
-function initAudio() {
-  if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-  if (audioCtx.state === 'suspended') audioCtx.resume();
-}
-
-function playSuccessSound() {
-  initAudio();
-  let osc = audioCtx.createOscillator();
-  let gain = audioCtx.createGain();
-  osc.type = 'triangle';
-  osc.frequency.setValueAtTime(523.25, audioCtx.currentTime); // C5
-  osc.frequency.exponentialRampToValueAtTime(659.25, audioCtx.currentTime + 0.15); // E5
-  osc.frequency.exponentialRampToValueAtTime(783.99, audioCtx.currentTime + 0.3); // G5
-  gain.gain.setValueAtTime(0.15, audioCtx.currentTime);
-  gain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + 0.6);
-  osc.connect(gain);
-  gain.connect(audioCtx.destination);
-  osc.start();
-  osc.stop(audioCtx.currentTime + 0.6);
-}
-
-function toggleAudio(type) {
-  initAudio();
-  if (noiseNode) { noiseNode.stop(); noiseNode.disconnect(); noiseNode = null; }
-  if (type === 'none') return;
-
-  let bufferSize = audioCtx.sampleRate * 2;
-  let buffer = audioCtx.createBuffer(1, bufferSize, audioCtx.sampleRate);
-  let data = buffer.getChannelData(0);
-  let lastOut = 0.0;
-
-  for (let i = 0; i < bufferSize; i++) {
-    let white = Math.random() * 2 - 1;
-    if (type === 'pink') {
-      lastOut = (lastOut + (0.02 * white)) / 1.02;
-      data[i] = lastOut * 3.5;
-    } else { data[i] = white; }
-  }
-
-  noiseNode = audioCtx.createBufferSource();
-  noiseNode.buffer = buffer; noiseNode.loop = true;
-  let gainNode = audioCtx.createGain();
-  gainNode.gain.value = type === 'pink' ? 0.03 : 0.015;
-  noiseNode.connect(gainNode); gainNode.connect(audioCtx.destination); noiseNode.start();
-}
 
 // الاحتفالية والقصاصات الورقية (Confetti)
 let confettiParticles = [];
@@ -381,7 +322,6 @@ function launchConfetti() {
 }
 
 function triggerCelebration(msg) {
-  playSuccessSound();
   launchConfetti();
   if(msg) $('celebrateMsg').textContent = msg;
   $('celebrateOverlay').classList.add('show');
@@ -433,7 +373,6 @@ function taskHTML(x){
 }
 
 function toggleTask(id){
-  initAudio();
   let x=tasks.find(x=>x.id===id);
   x.done=!x.done;
   save(); render();
@@ -451,11 +390,11 @@ function saveNotes(){localStorage.setItem('study_notes',$('quickNotes').value)}
 
 function fmt(s){return String(Math.floor(s/60)).padStart(2,'0')+':'+String(s%60).padStart(2,'0')}
 function paint(){ $('clock').textContent=fmt(seconds);let p=(1-seconds/totalSeconds)*100;$('ring').style.setProperty('--p',p+'%')}
-function setTimer(m){initAudio();pauseTimer();seconds=totalSeconds=m*60;$('mode').textContent='دراسة';paint()}
-function setBreak(){initAudio();pauseTimer();seconds=totalSeconds=600;$('mode').textContent='استراحة';paint()}
+function setTimer(m){pauseTimer();seconds=totalSeconds=m*60;$('mode').textContent='دراسة';paint()}
+function setBreak(){pauseTimer();seconds=totalSeconds=600;$('mode').textContent='استراحة';paint()}
 
 function startTimer(){
-  initAudio(); if(running)return; running=true; $('start').textContent='يعمل...';
+  if(running)return; running=true; $('start').textContent='يعمل...';
   timer=setInterval(()=>{
     seconds--; paint();
     if(seconds<=0){
@@ -504,7 +443,6 @@ function renderCalendar(){
  $('calendar').innerHTML=h
 }
 
-document.body.addEventListener('click', initAudio, { once: true });
 $('date').value=today();updateNow();setInterval(updateNow,1000);paint();render();
 </script>
 </body></html>
