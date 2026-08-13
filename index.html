@@ -2,109 +2,130 @@
 <html lang="ar" dir="rtl">
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Ameer | أمير</title>
+<title>Ameer | مسار - منصة الدراسة والتركيز</title>
 <style>
 :root{
-  --bg: #f8f6f0;        /* خلفية كريمية صيفية ناعمة */
-  --panel: #ffffff;     /* خلفية البطاقات والقوائم */
-  --panel2: #f0ede6;    /* أزرار وحقول فرعية */
-  --line: #e2ddd3;     /* حدود ناعمة ومريحة */
-  --text: #2d3142;     /* نص رمادي داكن مريح للقراءة */
-  --muted: #7c8294;    /* نصوص فرعية */
-  --soft: #5c6275;     /* نصوص معتدلة */
-  --accent: #3b82f6;   /* أزرق سماوي صيفي حيوّي هادئ */
+  --bg: #f8f6f0;
+  --panel: #ffffff;
+  --panel2: #f0ede6;
+  --line: #e2ddd3;
+  --text: #2d3142;
+  --muted: #7c8294;
+  --soft: #5c6275;
+  --accent: #3b82f6;
+  --accent-soft: #dbeafe;
+  --success: #10b981;
 }
 *{box-sizing:border-box}
 body{margin:0;background:var(--bg);color:var(--text);font-family:system-ui,-apple-system,sans-serif}
 button,input,select,textarea{font:inherit}
 button{cursor:pointer}
-.app{display:grid;grid-template-columns:240px 1fr;min-height:100vh}
-.side{border-left:1px solid var(--line);background:var(--panel);padding:22px 16px;position:sticky;top:0;height:100vh;box-shadow:-2px 0 10px rgba(0,0,0,0.02)}
-.brand{font-weight:900;font-size:22px;margin:4px 8px 30px;color:var(--text)}
+.app{display:grid;grid-template-columns:260px 1fr;min-height:100vh}
+.side{border-left:1px solid var(--line);background:var(--panel);padding:24px 18px;position:sticky;top:0;height:100vh;display:flex;flex-direction:column;justify-content:space-between;box-shadow:-2px 0 10px rgba(0,0,0,0.02)}
+.brand{font-weight:900;font-size:24px;margin:0 0 25px;color:var(--text);display:flex;align-items:center;gap:8px}
 .brand span{color:var(--accent)}
-.nav button{display:block;width:100%;text-align:right;border:1px solid transparent;background:transparent;color:var(--muted);padding:13px 14px;border-radius:12px;margin:5px 0;font-weight:600}
+.streak-badge{background:var(--accent-soft);color:var(--accent);padding:6px 12px;border-radius:20px;font-size:12px;font-weight:bold;display:inline-flex;align-items:center;gap:5px;margin-bottom:15px}
+.nav button{display:flex;align-items:center;gap:10px;width:100%;text-align:right;border:1px solid transparent;background:transparent;color:var(--muted);padding:12px 14px;border-radius:12px;margin:4px 0;font-weight:600;transition:.2s}
 .nav button.active,.nav button:hover{background:var(--panel2);color:var(--text);border-color:var(--line)}
-.tip{position:absolute;bottom:20px;left:16px;right:16px;background:var(--panel2);border:1px solid var(--line);padding:14px;border-radius:14px;color:var(--soft);font-size:12px;line-height:1.7}
-main{padding:24px;max-width:1250px;width:100%;margin:auto}
-.top{display:flex;justify-content:space-between;gap:15px;align-items:center;margin-bottom:20px}
-.welcome h1{margin:0;font-size:27px;color:var(--text)}
-.welcome p{margin:7px 0;color:var(--muted)}
-.datebox{background:var(--panel);border:1px solid var(--line);padding:12px 15px;border-radius:13px;color:var(--soft);text-align:center;font-size:13px;box-shadow:0 2px 5px rgba(0,0,0,0.02)}
-.cards{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
-.card{background:var(--panel);border:1px solid var(--line);border-radius:17px;padding:17px;box-shadow:0 4px 12px rgba(0,0,0,0.02)}
-.metric{color:var(--muted);font-size:12px}
-.metric b{display:block;font-size:27px;color:var(--text);margin-top:7px}
-.progress{height:8px;background:var(--panel2);border-radius:20px;margin-top:13px;overflow:hidden}
+.side-footer{border-top:1px solid var(--line);padding-top:15px;font-size:12px;color:var(--muted)}
+main{padding:28px;max-width:1300px;width:100%;margin:auto}
+.top{display:flex;justify-content:space-between;gap:15px;align-items:center;margin-bottom:24px}
+.welcome h1{margin:0;font-size:26px;color:var(--text)}
+.welcome p{margin:6px 0 0;color:var(--muted)}
+.datebox{background:var(--panel);border:1px solid var(--line);padding:12px 18px;border-radius:14px;color:var(--soft);text-align:center;font-size:13px;box-shadow:0 2px 6px rgba(0,0,0,0.02)}
+.cards{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:20px;box-shadow:0 4px 14px rgba(0,0,0,0.02)}
+.metric{color:var(--muted);font-size:13px}
+.metric b{display:block;font-size:28px;color:var(--text);margin-top:6px}
+.progress{height:8px;background:var(--panel2);border-radius:20px;margin-top:12px;overflow:hidden}
 .fill{height:100%;background:var(--accent);width:0;transition:.3s}
-.layout{display:grid;grid-template-columns:1.3fr .7fr;gap:15px;margin-top:15px}
-.section{margin-top:15px}
-.head{display:flex;justify-content:space-between;align-items:center;margin-bottom:13px}
+.layout{display:grid;grid-template-columns:1.2fr .8fr;gap:16px;margin-top:16px}
+.section{margin-top:16px}
+.head{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px}
 .head h2{font-size:18px;margin:0;color:var(--text)}
 .muted{color:var(--muted);font-size:12px}
 .timer{text-align:center}
-.ring{width:210px;height:210px;border-radius:50%;margin:10px auto 17px;display:grid;place-items:center;background:conic-gradient(var(--accent) var(--p), var(--panel2) 0);position:relative}
+.ring{width:210px;height:210px;border-radius:50%;margin:12px auto 18px;display:grid;place-items:center;background:conic-gradient(var(--accent) var(--p), var(--panel2) 0);position:relative}
 .ring:after{content:"";position:absolute;width:184px;height:184px;background:var(--panel);border-radius:50%}
-.time{position:relative;z-index:2;font-size:48px;font-weight:900;letter-spacing:1px;color:var(--accent)}
-.timerMode{color:var(--muted);position:relative;z-index:2}
+.time{position:relative;z-index:2;font-size:46px;font-weight:900;letter-spacing:1px;color:var(--accent)}
+.timerMode{color:var(--muted);position:relative;z-index:2;font-weight:bold}
 .timerBtns{display:flex;justify-content:center;gap:8px;flex-wrap:wrap}
-.btn{border:1px solid var(--line);background:var(--panel2);color:var(--text);border-radius:11px;padding:10px 15px;font-weight:700}
+.btn{border:1px solid var(--line);background:var(--panel2);color:var(--text);border-radius:11px;padding:10px 16px;font-weight:700;transition:.2s}
 .btn:hover{background:var(--line)}
 .btn.dark{background:var(--accent);color:#ffffff;border:0;font-weight:800}
-.presets{display:flex;gap:6px;justify-content:center;margin:13px 0}
-.presets button{font-size:12px;padding:7px 10px;background:var(--panel2);color:var(--text);border:1px solid var(--line)}
-.task{display:flex;gap:11px;align-items:center;background:var(--panel2);border:1px solid var(--line);border-radius:13px;padding:12px;margin:8px 0}
+.presets{display:flex;gap:6px;justify-content:center;margin:12px 0}
+.presets button{font-size:12px;padding:7px 12px;background:var(--panel2);color:var(--text);border:1px solid var(--line);border-radius:8px}
+.task{display:flex;gap:12px;align-items:center;background:var(--panel2);border:1px solid var(--line);border-radius:14px;padding:14px;margin:8px 0}
 .check{width:22px;height:22px;border:1px solid var(--muted);border-radius:6px;display:grid;place-items:center;flex:none;cursor:pointer;color:var(--accent);background:var(--panel)}
 .task.done{opacity:.5}
 .task.done .taskTitle{text-decoration:line-through}
 .taskBody{flex:1}
 .taskTitle{font-weight:800;color:var(--text)}
-.meta{font-size:11px;color:var(--muted);margin-top:5px}
-.priority{font-size:10px;border:1px solid var(--line);padding:4px 7px;border-radius:20px;color:var(--soft);background:var(--panel)}
+.meta{font-size:11px;color:var(--muted);margin-top:4px}
+.priority{font-size:10px;border:1px solid var(--line);padding:3px 8px;border-radius:20px;color:var(--soft);background:var(--panel)}
 .delete{background:transparent;color:var(--muted);border:0;cursor:pointer}
 .delete:hover{color:#ef4444}
-.empty{text-align:center;padding:28px;color:var(--muted)}
-form{display:grid;grid-template-columns:1fr 1fr;gap:9px}
+.empty{text-align:center;padding:30px;color:var(--muted)}
+form{display:grid;grid-template-columns:1fr 1fr;gap:10px}
 input,select,textarea{background:var(--bg);color:var(--text);border:1px solid var(--line);border-radius:10px;padding:11px;width:100%;outline:none}
 input:focus,select:focus,textarea:focus{border-color:var(--accent)}
-textarea{min-height:76px;resize:vertical}
+textarea{min-height:80px;resize:vertical}
 .full{grid-column:1/-1}
 .calendar{display:grid;grid-template-columns:repeat(7,1fr);gap:6px}
-.day{min-height:72px;border:1px solid var(--line);border-radius:10px;background:var(--panel2);padding:7px}
+.day{min-height:75px;border:1px solid var(--line);border-radius:10px;background:var(--panel2);padding:8px}
 .day .n{font-size:11px;color:var(--muted)}
 .day.today{border-color:var(--accent);background:var(--panel)}
 .dot{display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--accent);margin:2px}
-.filter{display:flex;gap:7px}
-.filter button{font-size:11px;padding:7px 10px;border-radius:9px;border:1px solid var(--line);background:var(--panel2);color:var(--muted)}
+.filter{display:flex;gap:6px}
+.filter button{font-size:11px;padding:6px 12px;border-radius:8px;border:1px solid var(--line);background:var(--panel2);color:var(--muted)}
 .filter button.active{background:var(--accent);color:#ffffff;border-color:var(--accent);font-weight:bold}
-@media(max-width:950px){.app{grid-template-columns:1fr}.side{height:auto;position:relative;border-left:0;border-bottom:1px solid var(--line)}.nav{display:flex;gap:5px;overflow:auto}.nav button{white-space:nowrap;width:auto}.tip{display:none}.cards{grid-template-columns:repeat(2,1fr)}.layout{grid-template-columns:1fr}}
-@media(max-width:560px){main{padding:14px}.cards{grid-template-columns:1fr 1fr}.top{align-items:flex-start}.datebox{font-size:10px}.welcome h1{font-size:21px}.ring{width:180px;height:180px}.ring:after{width:156px;height:156px}.time{font-size:40px}form{grid-template-columns:1fr}}
+.sound-box{display:flex;gap:10px;margin-top:15px;background:var(--panel2);padding:10px;border-radius:12px;border:1px solid var(--line);align-items:center;justify-content:space-between}
+.sound-box select{padding:6px;width:auto;font-size:12px}
+
+@media(max-width:1024px){
+  .app{grid-template-columns:1fr}
+  .side{height:auto;position:relative;border-left:0;border-bottom:1px solid var(--line)}
+  .nav{display:flex;gap:6px;overflow-x:auto;padding-bottom:5px}
+  .nav button{white-space:nowrap;width:auto}
+  .cards{grid-template-columns:repeat(2,1fr)}
+  .layout{grid-template-columns:1fr}
+}
+@media(max-width:560px){
+  main{padding:16px}
+  .cards{grid-template-columns:1fr 1fr}
+  .welcome h1{font-size:20px}
+  .ring{width:180px;height:180px}
+  .ring:after{width:154px;height:154px}
+  .time{font-size:38px}
+  form{grid-template-columns:1fr}
+}
 .celebrate{position:fixed;inset:0;background:rgba(0,0,0,0.3);display:none;place-items:center;z-index:99}
 .celebrate.show{display:grid}
 .celebrateBox{background:var(--panel);border:1px solid var(--accent);border-radius:22px;padding:30px;text-align:center;box-shadow:0 10px 30px rgba(0,0,0,0.1)}
 .celebrateBox .emoji{font-size:58px}
-.celebrateBox h2{margin:10px 0;color:var(--text)}
-.celebrateBox p{color:var(--muted)}
-.confetti{position:absolute;inset:0;overflow:hidden;pointer-events:none}
-.confetti i{position:absolute;width:8px;height:18px;background:var(--accent);animation:fall 1.4s linear forwards}
-@keyframes fall{from{transform:translateY(-20px) rotate(0)}to{transform:translateY(100vh) rotate(540deg);opacity:0}}
-.details{display:flex;gap:5px;flex-wrap:wrap;margin-top:7px}
-.tag{background:var(--panel);border:1px solid var(--line);border-radius:7px;padding:4px 7px;font-size:10px;color:var(--muted)}
-.subjectHead{font-size:11px;color:var(--accent);margin-bottom:4px;font-weight:bold}
-.calDone{font-size:10px;color:var(--accent);margin-top:5px}
-.doneMark{font-size:10px;background:var(--accent);color:#ffffff;border-radius:8px;padding:3px 6px;font-weight:bold}
+.details{display:flex;gap:5px;flex-wrap:wrap;margin-top:6px}
+.tag{background:var(--panel);border:1px solid var(--line);border-radius:7px;padding:3px 7px;font-size:10px;color:var(--muted)}
+.subjectHead{font-size:11px;color:var(--accent);margin-bottom:3px;font-weight:bold}
 </style>
 </head>
 <body>
 <div class="app">
 <aside class="side">
- <div class="brand">MASAR <span>مسار</span></div>
- <div class="nav">
-  <button class="active" onclick="showTab('home',this)">⌂ الرئيسية</button>
-  <button onclick="showTab('tasksTab',this)">✓ المهام</button>
-  <button onclick="showTab('calendarTab',this)">▦ التقويم</button>
-  <button onclick="showTab('statsTab',this)">◒ الإحصائيات</button>
+ <div>
+   <div class="brand">MASAR <span>مسار</span></div>
+   <div class="streak-badge" id="streakDisplay">🔥 0 يوم سلسلة التزام</div>
+   <div class="nav">
+    <button class="active" onclick="showTab('home',this)">⌂ الرئيسية</button>
+    <button onclick="showTab('tasksTab',this)">✓ المهام والتخطيط</button>
+    <button onclick="showTab('calendarTab',this)">▦ التقويم الدراسي</button>
+    <button onclick="showTab('notesTab',this)">📝 مسودة وملاحظات</button>
+    <button onclick="showTab('statsTab',this)">◒ الإحصائيات</button>
+   </div>
  </div>
- <div class="tip">نصيحة اليوم<br>ابدأ بمهمة واحدة فقط، وأغلق المشتتات أثناء المؤقت.</div>
+ <div class="side-footer">
+   <div style="font-weight:bold;margin-bottom:4px">مسار الطالب الذكي 🎓</div>
+   <div>نظّم وقتك، أنجز مهامك، وحقق هدفك.</div>
+ </div>
 </aside>
 
 <main>
@@ -114,7 +135,7 @@ textarea{min-height:76px;resize:vertical}
  <div class="cards">
   <div class="card"><div class="metric">مهام اليوم</div><div class="metric"><b id="total">0</b></div></div>
   <div class="card"><div class="metric">المكتملة</div><div class="metric"><b id="done">0</b></div></div>
-  <div class="card"><div class="metric">وقت الدراسة</div><div class="metric"><b id="minutes">0 د</b></div></div>
+  <div class="card"><div class="metric">وقت الدراسة اليوم</div><div class="metric"><b id="minutes">0 د</b></div></div>
   <div class="card"><div class="metric">إنجاز اليوم</div><div class="metric"><b id="percent">0%</b></div><div class="progress"><div class="fill" id="progress"></div></div></div>
  </div>
 
@@ -122,21 +143,48 @@ textarea{min-height:76px;resize:vertical}
   <section class="card timer">
    <div class="head"><h2>مؤقت التركيز</h2><span class="muted" id="sessionCount">0 جلسات</span></div>
    <div class="ring" id="ring"><div><div class="timerMode" id="mode">دراسة</div><div class="time" id="clock">50:00</div></div></div>
-   <div class="presets"><button class="btn" onclick="setTimer(25)">25</button><button class="btn" onclick="setTimer(50)">50</button><button class="btn" onclick="setTimer(90)">90</button><button class="btn" onclick="setBreak()">10 استراحة</button></div>
-   <div class="timerBtns"><button class="btn dark" id="start" onclick="startTimer()">ابدأ</button><button class="btn" onclick="pauseTimer()">إيقاف</button><button class="btn" onclick="resetTimer()">إعادة ضبط</button></div>
-   <div class="muted" style="margin-top:12px" id="timerMsg">عند انتهاء جلسة الدراسة تُضاف الدقائق تلقائياً.</div>
+   <div class="presets">
+     <button onclick="setTimer(25)">25 بومودورو</button>
+     <button onclick="setTimer(45)">45 محاضرة</button>
+     <button onclick="setTimer(90)">90 دراسة مركزة</button>
+     <button onclick="setBreak()">10 استراحة</button>
+   </div>
+   <div class="timerBtns">
+     <button class="btn dark" id="start" onclick="startTimer()">ابدأ الجلسة</button>
+     <button class="btn" onclick="pauseTimer()">إيقاف</button>
+     <button class="btn" onclick="resetTimer()">إعادة ضبط</button>
+   </div>
+   
+   <div class="sound-box">
+     <span class="muted">🎧 صوت الخلفية:</span>
+     <select id="audioSelect" onchange="toggleAudio(this.value)">
+       <option value="none">بدون صوت</option>
+       <option value="rain">صوت المطر 🌧️</option>
+       <option value="white">ضوضاء بيضاء ⚪</option>
+     </select>
+   </div>
   </section>
 
   <section class="card">
-   <div class="head"><h2>إضافة مهمة</h2><span class="muted">لليوم أو أي تاريخ</span></div>
+   <div class="head"><h2>إضافة مهمة جديدة</h2><span class="muted">تحديد المادة والتاريخ</span></div>
    <form id="form">
-    <select id="subject" required><option value="">اختر المادة</option><option>رياضيات</option><option>فيزياء</option><option>كيمياء</option><option>أحياء</option><option>إنكليزي</option><option>عربي</option><option>إسلامية</option><option>مادة أخرى</option></select>
+    <select id="subject" required>
+      <option value="">اختر المادة</option>
+      <option>رياضيات</option>
+      <option>فيزياء</option>
+      <option>كيمياء</option>
+      <option>أحياء</option>
+      <option>إنكليزي</option>
+      <option>عربي</option>
+      <option>إسلامية</option>
+      <option>مادة أخرى</option>
+    </select>
     <input id="title" placeholder="اسم المهمة — مثال: الفصل الثالث" required>
     <input id="date" type="date" required>
-    <input id="lectures" type="number" min="0" placeholder="عدد المحاضرات">
+    <input id="lectures" type="number" min="0" placeholder="عدد المحاضرات / الصفحات">
     <select id="priority"><option>عالية</option><option selected>متوسطة</option><option>منخفضة</option></select>
-    <textarea id="notes" class="full" placeholder="تفاصيل المهمة أو ملاحظاتك"></textarea>
-    <button class="btn dark full">+ إضافة المهمة</button>
+    <textarea id="notes" class="full" placeholder="تفاصيل المهمة، ملاحظات أو أسئلة مهمة"></textarea>
+    <button class="btn dark full">+ إضافة المهمة إلى المسار</button>
    </form>
   </section>
  </div>
@@ -148,11 +196,18 @@ textarea{min-height:76px;resize:vertical}
 </div>
 
 <div id="tasksTab" class="tab" style="display:none">
- <section class="card"><div class="head"><h2>كل المهام</h2><span class="muted" id="allCount"></span></div><div id="allTasks"></div></section>
+ <section class="card"><div class="head"><h2>جدول كافة المهام</h2><span class="muted" id="allCount"></span></div><div id="allTasks"></div></section>
 </div>
 
 <div id="calendarTab" class="tab" style="display:none">
  <section class="card"><div class="head"><button class="btn" onclick="changeMonth(-1)">‹</button><h2 id="monthTitle"></h2><button class="btn" onclick="changeMonth(1)">›</button></div><div class="calendar" id="calendar"></div></section>
+</div>
+
+<div id="notesTab" class="tab" style="display:none">
+  <section class="card">
+    <div class="head"><h2>مسودة الملاحظات السريعة 📝</h2><span class="muted">تحفظ تلقائياً داخل جهازك</span></div>
+    <textarea id="quickNotes" style="width:100%;min-height:320px;padding:15px;line-height:1.7;" placeholder="اكتب قوانينك، الملاحظات المهمة، أو جدولك الخاص هنا..." oninput="saveNotes()"></textarea>
+  </section>
 </div>
 
 <div id="statsTab" class="tab" style="display:none">
@@ -162,7 +217,15 @@ textarea{min-height:76px;resize:vertical}
   <div class="card"><div class="metric">كل المهام</div><div class="metric"><b id="sTasks">0</b></div></div>
   <div class="card"><div class="metric">مكتملة</div><div class="metric"><b id="sDone">0</b></div></div>
  </div>
- <section class="card section"><h2>ملخص الأداء</h2><p class="muted">استمر يومياً. الهدف ليس عدد الساعات فقط، بل إكمال المهام المهمة.</p><div class="progress" style="height:14px"><div class="fill" id="allProgress"></div></div><div class="muted" id="allProgressText" style="margin-top:9px"></div></section>
+ <section class="card section">
+   <h2>النسخ الاحتياطي وإدارة البيانات</h2>
+   <p class="muted">يمكنك تصدير بياناتك للنسخ الاحتياطي أو نقلها لجهاز آخر.</p>
+   <div style="display:flex;gap:10px;margin-top:10px">
+     <button class="btn" onclick="exportData()">💾 تصدير البيانات</button>
+     <button class="btn" onclick="document.getElementById('importFile').click()">📂 استرجاع البيانات</button>
+     <input type="file" id="importFile" style="display:none" onchange="importData(event)">
+   </div>
+ </section>
 </div>
 </main>
 </div>
@@ -170,25 +233,42 @@ textarea{min-height:76px;resize:vertical}
 <script>
 const $=x=>document.getElementById(x);
 let tasks=JSON.parse(localStorage.getItem('study_pro_tasks')||'[]');
-let stats=JSON.parse(localStorage.getItem('study_pro_stats')||'{"minutes":0,"sessions":0}');
+let stats=JSON.parse(localStorage.getItem('study_pro_stats')||'{"minutes":0,"sessions":0,"streak":0,"lastActive":""}');
 let seconds=3000,totalSeconds=3000,timer=null,running=false,filter='all',calDate=new Date();
+let audioCtx=null, noiseNode=null;
 
 const today=()=>new Date().toISOString().slice(0,10);
 const save=()=>{localStorage.setItem('study_pro_tasks',JSON.stringify(tasks));localStorage.setItem('study_pro_stats',JSON.stringify(stats))};
 const esc=s=>String(s??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]));
+
+function updateStreak(){
+  let t=today();
+  if(stats.lastActive!==t){
+    let yesterday=new Date();yesterday.setDate(yesterday.getDate()-1);
+    let yStr=yesterday.toISOString().slice(0,10);
+    if(stats.lastActive===yStr){ stats.streak=(stats.streak||0)+1; }
+    else if(stats.lastActive!==t){ stats.streak=1; }
+    stats.lastActive=t; save();
+  }
+  $('streakDisplay').textContent=`🔥 ${stats.streak||1} يوم سلسلة التزام`;
+}
+
 function updateNow(){let d=new Date();$('now').innerHTML=d.toLocaleDateString('ar-IQ',{weekday:'long',day:'numeric',month:'long'})+'<br>'+d.toLocaleTimeString('ar-IQ',{hour:'2-digit',minute:'2-digit'});$('greeting').textContent=d.getHours()<12?'صباح الخير، وقت ممتاز للإنجاز.':d.getHours()<18?'يومك مستمر، أنجز المهمة التالية.':'مساء الإنجاز، ركّز على أهم مهمة.'}
+
 function render(){
  let t=today(), list=tasks.filter(x=>x.date===t), done=list.filter(x=>x.done).length;
  if(filter==='open')list=list.filter(x=>!x.done);if(filter==='done')list=list.filter(x=>x.done);
- $('todayTasks').innerHTML=list.length?list.sort((a,b)=>(a.time||'99:99').localeCompare(b.time||'99:99')).map(taskHTML).join(''):'<div class="empty">لا توجد مهام هنا.</div>';
+ $('todayTasks').innerHTML=list.length?list.sort((a,b)=>(a.time||'99:99').localeCompare(b.time||'99:99')).map(taskHTML).join(''):'<div class="empty">لا توجد مهام مضافة لهذا اليوم.</div>';
  $('total').textContent=tasks.filter(x=>x.date===t).length;$('done').textContent=done;$('minutes').textContent=stats.minutes+' د';let p=tasks.filter(x=>x.date===t).length?Math.round(done/tasks.filter(x=>x.date===t).length*100):0;$('percent').textContent=p+'%';$('progress').style.width=p+'%';$('sessionCount').textContent=stats.sessions+' جلسات';
- $('allTasks').innerHTML=tasks.length?tasks.sort((a,b)=>a.date.localeCompare(b.date)|| (a.time||'').localeCompare(b.time||'')).map(taskHTML).join(''):'<div class="empty">لا توجد مهام.</div>';$('allCount').textContent=tasks.length+' مهمة';
- $('sMinutes').textContent=stats.minutes+' د';$('sSessions').textContent=stats.sessions;$('sTasks').textContent=tasks.length;$('sDone').textContent=tasks.filter(x=>x.done).length;let ap=tasks.length?Math.round(tasks.filter(x=>x.done).length/tasks.length*100):0;$('allProgress').style.width=ap+'%';$('allProgressText').textContent=ap+'% من جميع المهام مكتملة';
- renderCalendar();
+ $('allTasks').innerHTML=tasks.length?tasks.sort((a,b)=>a.date.localeCompare(b.date)).map(taskHTML).join(''):'<div class="empty">لا توجد مهام مسجلة.</div>';$('allCount').textContent=tasks.length+' مهمة';
+ $('sMinutes').textContent=stats.minutes+' د';$('sSessions').textContent=stats.sessions;$('sTasks').textContent=tasks.length;$('sDone').textContent=tasks.filter(x=>x.done).length;
+ $('quickNotes').value=localStorage.getItem('study_notes')||'';
+ updateStreak();renderCalendar();
 }
+
 function taskHTML(x){
  let details=[];
- if(x.lectures>0)details.push('🎥 '+x.lectures+' محاضرة');
+ if(x.lectures>0)details.push('📖 '+x.lectures+' محاضرة/صفحة');
  return `<div class="task ${x.done?'done':''}">
  <div class="check" onclick="toggleTask('${x.id}')">${x.done?'✓':''}</div>
  <div class="taskBody">
@@ -197,32 +277,54 @@ function taskHTML(x){
   <div class="details">${details.map(d=>`<span class="tag">${d}</span>`).join('')}</div>
   <div class="meta">${x.date}${x.notes?' · '+esc(x.notes):''}</div>
  </div>
- ${x.done?'<span class="doneMark">مكتملة ✓</span>':''}
  <span class="priority">${esc(x.priority)}</span><button class="delete" onclick="delTask('${x.id}')">حذف</button>
  </div>`
 }
-function toggleTask(id){let x=tasks.find(x=>x.id===id);let was=x.done;x.done=!x.done;save();render();if(!was)celebrate()}
+
+function toggleTask(id){let x=tasks.find(x=>x.id===id);x.done=!x.done;save();render();}
 function delTask(id){tasks=tasks.filter(x=>x.id!==id);save();render()}
 function setFilter(f,b){filter=f;document.querySelectorAll('.filter button').forEach(x=>x.classList.remove('active'));b.classList.add('active');render()}
+
 $('form').onsubmit=e=>{e.preventDefault();tasks.push({
  id:Date.now().toString(),subject:$('subject').value,title:$('title').value,date:$('date').value,
- lectures:$('lectures').value,
- priority:$('priority').value,notes:$('notes').value,done:false
+ lectures:$('lectures').value,priority:$('priority').value,notes:$('notes').value,done:false
 });save();e.target.reset();$('date').value=today();render();showTab('home',document.querySelector('.nav button'))}
 
-function celebrate(){
- $('celebrate').classList.add('show');let c=$('confetti');c.innerHTML='';
- for(let i=0;i<45;i++){let e=document.createElement('i');e.style.left=Math.random()*100+'%';e.style.top=(-Math.random()*20)+'px';e.style.animationDelay=Math.random()*.5+'s';e.style.transform='rotate('+Math.random()*360+'deg)';c.appendChild(e)}
-}
-function closeCelebrate(){$('celebrate').classList.remove('show');$('confetti').innerHTML=''}
+function saveNotes(){localStorage.setItem('study_notes',$('quickNotes').value)}
 
 function fmt(s){return String(Math.floor(s/60)).padStart(2,'0')+':'+String(s%60).padStart(2,'0')}
 function paint(){ $('clock').textContent=fmt(seconds);let p=(1-seconds/totalSeconds)*100;$('ring').style.setProperty('--p',p+'%')}
-function setTimer(m){pauseTimer();seconds=totalSeconds=m*60;$('mode').textContent='دراسة';$('timerMsg').textContent='عند انتهاء جلسة الدراسة تُضاف الدقائق تلقائياً.';paint()}
-function setBreak(){pauseTimer();seconds=totalSeconds=600;$('mode').textContent='استراحة';$('timerMsg').textContent='استراحة قصيرة. لا تُحسب ضمن وقت الدراسة.';paint()}
-function startTimer(){if(running)return;running=true;$('start').textContent='يعمل...';timer=setInterval(()=>{seconds--;paint();if(seconds<=0){clearInterval(timer);timer=null;running=false;$('start').textContent='ابدأ';if($('mode').textContent==='دراسة'){stats.minutes+=Math.round(totalSeconds/60);stats.sessions++;save();render();alert('انتهت جلسة الدراسة 🎉');setBreak()}else{alert('انتهت الاستراحة. وقت العودة للدراسة.');setTimer(50)}}},1000)}
+function setTimer(m){pauseTimer();seconds=totalSeconds=m*60;$('mode').textContent='دراسة';paint()}
+function setBreak(){pauseTimer();seconds=totalSeconds=600;$('mode').textContent='استراحة';paint()}
+function startTimer(){if(running)return;running=true;$('start').textContent='يعمل...';timer=setInterval(()=>{seconds--;paint();if(seconds<=0){clearInterval(timer);timer=null;running=false;$('start').textContent='ابدأ الجلسة';if($('mode').textContent==='دراسة'){stats.minutes+=Math.round(totalSeconds/60);stats.sessions++;save();render();alert('انتهت جلسة الدراسة 🎉 ممتااااز!');setBreak()}else{alert('انتهت الاستراحة، عد لإكمال المسار!');setTimer(50)}}},1000)}
 function pauseTimer(){if(timer)clearInterval(timer);timer=null;running=false;$('start').textContent='استئناف'}
 function resetTimer(){pauseTimer();setTimer(50)}
+
+function toggleAudio(type){
+  if(type==='none'){ if(audioCtx) audioCtx.close(); audioCtx=null; return; }
+  if(!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+  let bufferSize = audioCtx.sampleRate * 2, noiseBuffer = audioCtx.createBuffer(1, bufferSize, audioCtx.sampleRate), output = noiseBuffer.getChannelData(0);
+  for (let i = 0; i < bufferSize; i++) { output[i] = Math.random() * 2 - 1; }
+  let whiteNoise = audioCtx.createBufferSource(); whiteNoise.buffer = noiseBuffer; whiteNoise.loop = true;
+  let gainNode = audioCtx.createGain(); gainNode.gain.value = 0.03;
+  whiteNoise.connect(gainNode); gainNode.connect(audioCtx.destination); whiteNoise.start();
+}
+
+function exportData(){
+  let dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify({tasks,stats}));
+  let downloadAnchor = document.createElement('a'); downloadAnchor.setAttribute("href", dataStr);
+  downloadAnchor.setAttribute("download", "masar_backup.json"); document.body.appendChild(downloadAnchor);
+  downloadAnchor.click(); downloadAnchor.remove();
+}
+
+function importData(e){
+  let reader = new FileReader();
+  reader.onload = function(event){
+    let data = JSON.parse(event.target.result);
+    if(data.tasks && data.stats){ tasks=data.tasks; stats=data.stats; save(); render(); alert('تم استرجاع البيانات بنجاح!'); }
+  };
+  reader.readAsText(e.target.files[0]);
+}
 
 function showTab(id,b){document.querySelectorAll('.tab').forEach(x=>x.style.display='none');$(id).style.display='block';document.querySelectorAll('.nav button').forEach(x=>x.classList.remove('active'));b.classList.add('active')}
 function changeMonth(n){calDate.setMonth(calDate.getMonth()+n);renderCalendar()}
@@ -235,11 +337,11 @@ function renderCalendar(){
  for(let i=0;i<first;i++)h+='<div></div>';
  for(let d=1;d<=days;d++){
   let key=new Date(y,m,d).toISOString().slice(0,10), list=tasks.filter(x=>x.date===key), c=list.length, done=list.filter(x=>x.done).length,cl=key===today()?' today':'';
-  h+=`<div class="day${cl}"><div class="n">${d}</div>${c?'<div>'+Array(Math.min(c,5)).fill('<span class="dot"></span>').join('')+'</div>':''}${done?`<div class="calDone">✓ ${done} من ${c} مكتملة</div>`:''}</div>`
+  h+=`<div class="day${cl}"><div class="n">${d}</div>${c?'<div>'+Array(Math.min(c,5)).fill('<span class="dot"></span>').join('')+'</div>':''}${done?`<div style="font-size:10px;color:var(--accent);margin-top:4px">✓ ${done} مكتملة</div>`:''}</div>`
  }
  $('calendar').innerHTML=h
 }
+
 $('date').value=today();updateNow();setInterval(updateNow,1000);paint();render();
 </script>
-<div class="celebrate" id="celebrate"><div class="confetti" id="confetti"></div><div class="celebrateBox"><div class="emoji">🎉</div><h2>أحسنت!</h2><p>تم إنجاز المهمة بنجاح</p><button class="btn dark" onclick="closeCelebrate()">متابعة المسار</button></div></div>
 </body></html>
