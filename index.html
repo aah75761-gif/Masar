@@ -14,20 +14,38 @@
   --soft: #5c6275;
   --accent: #3b82f6;
   --accent-soft: #dbeafe;
-  --success: #10b981;
 }
+/* Themes */
+[data-theme="emerald"] {
+  --bg: #f4f8f5; --panel: #ffffff; --panel2: #e8f0ec; --line: #d2e2d8;
+  --text: #1b382b; --muted: #6b887a; --soft: #426352; --accent: #10b981; --accent-soft: #d1fae5;
+}
+[data-theme="sunset"] {
+  --bg: #faf5f3; --panel: #ffffff; --panel2: #f5e9e5; --line: #ebd5cd;
+  --text: #3d2621; --muted: #917169; --soft: #6e4d45; --accent: #f43f5e; --accent-soft: #ffe4e6;
+}
+[data-theme="dark"] {
+  --bg: #0f172a; --panel: #1e293b; --panel2: #334155; --line: #475569;
+  --text: #f8fafc; --muted: #94a3b8; --soft: #cbd5e1; --accent: #38bdf8; --accent-soft: #075985;
+}
+
 *{box-sizing:border-box}
-body{margin:0;background:var(--bg);color:var(--text);font-family:system-ui,-apple-system,sans-serif}
+body{margin:0;background:var(--bg);color:var(--text);font-family:system-ui,-apple-system,sans-serif;transition:background .3s,color .3s}
 button,input,select,textarea{font:inherit}
 button{cursor:pointer}
 .app{display:grid;grid-template-columns:260px 1fr;min-height:100vh}
 .side{border-left:1px solid var(--line);background:var(--panel);padding:24px 18px;position:sticky;top:0;height:100vh;display:flex;flex-direction:column;justify-content:space-between;box-shadow:-2px 0 10px rgba(0,0,0,0.02)}
-.brand{font-weight:900;font-size:24px;margin:0 0 25px;color:var(--text);display:flex;align-items:center;gap:8px}
+.brand{font-weight:900;font-size:24px;margin:0 0 15px;color:var(--text);display:flex;align-items:center;gap:8px}
 .brand span{color:var(--accent)}
 .streak-badge{background:var(--accent-soft);color:var(--accent);padding:6px 12px;border-radius:20px;font-size:12px;font-weight:bold;display:inline-flex;align-items:center;gap:5px;margin-bottom:15px}
+.theme-selector{margin-bottom:15px;display:flex;flex-direction:column;gap:5px}
+.theme-selector label{font-size:11px;color:var(--muted);font-weight:bold}
+.theme-selector select{padding:6px;border-radius:8px;border:1px solid var(--line);background:var(--panel2);color:var(--text);font-size:12px}
+
 .nav button{display:flex;align-items:center;gap:10px;width:100%;text-align:right;border:1px solid transparent;background:transparent;color:var(--muted);padding:12px 14px;border-radius:12px;margin:4px 0;font-weight:600;transition:.2s}
 .nav button.active,.nav button:hover{background:var(--panel2);color:var(--text);border-color:var(--line)}
 .side-footer{border-top:1px solid var(--line);padding-top:15px;font-size:12px;color:var(--muted)}
+.designer-tag{margin-top:8px;font-size:11px;font-weight:700;color:var(--accent);display:flex;align-items:center;gap:5px}
 main{padding:28px;max-width:1300px;width:100%;margin:auto}
 .top{display:flex;justify-content:space-between;gap:15px;align-items:center;margin-bottom:24px}
 .welcome h1{margin:0;font-size:26px;color:var(--text)}
@@ -82,6 +100,15 @@ textarea{min-height:80px;resize:vertical}
 .sound-box{display:flex;gap:10px;margin-top:15px;background:var(--panel2);padding:10px;border-radius:12px;border:1px solid var(--line);align-items:center;justify-content:space-between}
 .sound-box select{padding:6px;width:auto;font-size:12px}
 
+/* Celebration Overlay */
+.celebrate-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.5);display:none;place-items:center;z-index:999;backdrop-filter:blur(3px)}
+.celebrate-overlay.show{display:grid}
+.celebrate-box{background:var(--panel);border:2px solid var(--accent);border-radius:24px;padding:35px 25px;text-align:center;box-shadow:0 20px 40px rgba(0,0,0,0.2);max-width:380px;width:90%;position:relative;z-index:2}
+.celebrate-box h3{font-size:24px;margin:10px 0 5px;color:var(--text)}
+.celebrate-box p{color:var(--muted);font-size:14px;margin-bottom:20px}
+
+canvas#confettiCanvas{position:fixed;inset:0;pointer-events:none;z-index:1000}
+
 @media(max-width:1024px){
   .app{grid-template-columns:1fr}
   .side{height:auto;position:relative;border-left:0;border-bottom:1px solid var(--line)}
@@ -99,21 +126,40 @@ textarea{min-height:80px;resize:vertical}
   .time{font-size:38px}
   form{grid-template-columns:1fr}
 }
-.celebrate{position:fixed;inset:0;background:rgba(0,0,0,0.3);display:none;place-items:center;z-index:99}
-.celebrate.show{display:grid}
-.celebrateBox{background:var(--panel);border:1px solid var(--accent);border-radius:22px;padding:30px;text-align:center;box-shadow:0 10px 30px rgba(0,0,0,0.1)}
-.celebrateBox .emoji{font-size:58px}
 .details{display:flex;gap:5px;flex-wrap:wrap;margin-top:6px}
 .tag{background:var(--panel);border:1px solid var(--line);border-radius:7px;padding:3px 7px;font-size:10px;color:var(--muted)}
 .subjectHead{font-size:11px;color:var(--accent);margin-bottom:3px;font-weight:bold}
 </style>
 </head>
 <body>
+
+<canvas id="confettiCanvas"></canvas>
+
+<div class="celebrate-overlay" id="celebrateOverlay">
+  <div class="celebrate-box">
+    <div style="font-size:60px">🏆</div>
+    <h3>إنجاز أسطوري!</h3>
+    <p id="celebrateMsg">عاشت إيدك، أحسنت على هذا التقدّم المتميز.</p>
+    <button class="btn dark" style="width:100%" onclick="closeCelebrate()">متابعة المسار 🔥</button>
+  </div>
+</div>
+
 <div class="app">
 <aside class="side">
  <div>
    <div class="brand">MASAR <span>مسار</span></div>
    <div class="streak-badge" id="streakDisplay">🔥 0 يوم سلسلة التزام</div>
+   
+   <div class="theme-selector">
+     <label>🎨 اختر مظاهر الألوان:</label>
+     <select onchange="changeTheme(this.value)" id="themeSelect">
+       <option value="default">مسار (أزرق)</option>
+       <option value="emerald">زمردي (أخضر)</option>
+       <option value="sunset">غروب (وردي دافئ)</option>
+       <option value="dark">ليلي (Dark Mode)</option>
+     </select>
+   </div>
+
    <div class="nav">
     <button class="active" onclick="showTab('home',this)">⌂ الرئيسية</button>
     <button onclick="showTab('tasksTab',this)">✓ المهام والتخطيط</button>
@@ -125,6 +171,7 @@ textarea{min-height:80px;resize:vertical}
  <div class="side-footer">
    <div style="font-weight:bold;margin-bottom:4px">مسار الطالب الذكي 🎓</div>
    <div>نظّم وقتك، أنجز مهامك، وحقق هدفك.</div>
+   <div class="designer-tag">✨ تصميم وتطوير: أمير أحمد</div>
  </div>
 </aside>
 
@@ -156,11 +203,11 @@ textarea{min-height:80px;resize:vertical}
    </div>
    
    <div class="sound-box">
-     <span class="muted">🎧 صوت الخلفية:</span>
+     <span class="muted">🎧 صوت التركيز:</span>
      <select id="audioSelect" onchange="toggleAudio(this.value)">
-       <option value="none">بدون صوت</option>
-       <option value="rain">صوت المطر 🌧️</option>
+       <option value="none">مُغلق</option>
        <option value="white">ضوضاء بيضاء ⚪</option>
+       <option value="pink">ضوضاء وردية (أهدأ) 🌸</option>
      </select>
    </div>
   </section>
@@ -235,7 +282,111 @@ const $=x=>document.getElementById(x);
 let tasks=JSON.parse(localStorage.getItem('study_pro_tasks')||'[]');
 let stats=JSON.parse(localStorage.getItem('study_pro_stats')||'{"minutes":0,"sessions":0,"streak":0,"lastActive":""}');
 let seconds=3000,totalSeconds=3000,timer=null,running=false,filter='all',calDate=new Date();
-let audioCtx=null, noiseNode=null;
+
+// إعداد الثيم الألوان
+function changeTheme(theme){
+  if(theme==='default') document.documentElement.removeAttribute('data-theme');
+  else document.documentElement.setAttribute('data-theme', theme);
+  localStorage.setItem('study_theme', theme);
+}
+let currentTheme = localStorage.getItem('study_theme')||'default';
+changeTheme(currentTheme);
+if($('themeSelect')) $('themeSelect').value = currentTheme;
+
+// الصوت
+let audioCtx = null, noiseNode = null;
+function initAudio() {
+  if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+  if (audioCtx.state === 'suspended') audioCtx.resume();
+}
+
+function playSuccessSound() {
+  initAudio();
+  let osc = audioCtx.createOscillator();
+  let gain = audioCtx.createGain();
+  osc.type = 'triangle';
+  osc.frequency.setValueAtTime(523.25, audioCtx.currentTime); // C5
+  osc.frequency.exponentialRampToValueAtTime(659.25, audioCtx.currentTime + 0.15); // E5
+  osc.frequency.exponentialRampToValueAtTime(783.99, audioCtx.currentTime + 0.3); // G5
+  gain.gain.setValueAtTime(0.15, audioCtx.currentTime);
+  gain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + 0.6);
+  osc.connect(gain);
+  gain.connect(audioCtx.destination);
+  osc.start();
+  osc.stop(audioCtx.currentTime + 0.6);
+}
+
+function toggleAudio(type) {
+  initAudio();
+  if (noiseNode) { noiseNode.stop(); noiseNode.disconnect(); noiseNode = null; }
+  if (type === 'none') return;
+
+  let bufferSize = audioCtx.sampleRate * 2;
+  let buffer = audioCtx.createBuffer(1, bufferSize, audioCtx.sampleRate);
+  let data = buffer.getChannelData(0);
+  let lastOut = 0.0;
+
+  for (let i = 0; i < bufferSize; i++) {
+    let white = Math.random() * 2 - 1;
+    if (type === 'pink') {
+      lastOut = (lastOut + (0.02 * white)) / 1.02;
+      data[i] = lastOut * 3.5;
+    } else { data[i] = white; }
+  }
+
+  noiseNode = audioCtx.createBufferSource();
+  noiseNode.buffer = buffer; noiseNode.loop = true;
+  let gainNode = audioCtx.createGain();
+  gainNode.gain.value = type === 'pink' ? 0.03 : 0.015;
+  noiseNode.connect(gainNode); gainNode.connect(audioCtx.destination); noiseNode.start();
+}
+
+// الاحتفالية والقصاصات الورقية (Confetti)
+let confettiParticles = [];
+function launchConfetti() {
+  let canvas = $('confettiCanvas');
+  let ctx = canvas.getContext('2d');
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+  
+  confettiParticles = [];
+  let colors = ['#3b82f6', '#10b981', '#f43f5e', '#f59e0b', '#8b5cf6'];
+  for(let i=0; i<100; i++) {
+    confettiParticles.push({
+      x: Math.random() * canvas.width,
+      y: Math.random() * canvas.height - canvas.height,
+      size: Math.random() * 8 + 4,
+      color: colors[Math.floor(Math.random() * colors.length)],
+      speed: Math.random() * 5 + 2,
+      angle: Math.random() * 360
+    });
+  }
+  
+  let animation = setInterval(() => {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    let finished = true;
+    confettiParticles.forEach(p => {
+      p.y += p.speed;
+      p.angle += 5;
+      if(p.y < canvas.height) finished = false;
+      ctx.save();
+      ctx.translate(p.x, p.y);
+      ctx.rotate(p.angle * Math.PI / 180);
+      ctx.fillStyle = p.color;
+      ctx.fillRect(-p.size/2, -p.size/2, p.size, p.size);
+      ctx.restore();
+    });
+    if(finished) clearInterval(animation);
+  }, 20);
+}
+
+function triggerCelebration(msg) {
+  playSuccessSound();
+  launchConfetti();
+  if(msg) $('celebrateMsg').textContent = msg;
+  $('celebrateOverlay').classList.add('show');
+}
+function closeCelebrate() { $('celebrateOverlay').classList.remove('show'); }
 
 const today=()=>new Date().toISOString().slice(0,10);
 const save=()=>{localStorage.setItem('study_pro_tasks',JSON.stringify(tasks));localStorage.setItem('study_pro_stats',JSON.stringify(stats))};
@@ -281,7 +432,13 @@ function taskHTML(x){
  </div>`
 }
 
-function toggleTask(id){let x=tasks.find(x=>x.id===id);x.done=!x.done;save();render();}
+function toggleTask(id){
+  initAudio();
+  let x=tasks.find(x=>x.id===id);
+  x.done=!x.done;
+  save(); render();
+  if(x.done) triggerCelebration(`أنجزت مهمة "${x.title}" بنجاح! خطوة جديدة نحو النجاح.`);
+}
 function delTask(id){tasks=tasks.filter(x=>x.id!==id);save();render()}
 function setFilter(f,b){filter=f;document.querySelectorAll('.filter button').forEach(x=>x.classList.remove('active'));b.classList.add('active');render()}
 
@@ -294,21 +451,26 @@ function saveNotes(){localStorage.setItem('study_notes',$('quickNotes').value)}
 
 function fmt(s){return String(Math.floor(s/60)).padStart(2,'0')+':'+String(s%60).padStart(2,'0')}
 function paint(){ $('clock').textContent=fmt(seconds);let p=(1-seconds/totalSeconds)*100;$('ring').style.setProperty('--p',p+'%')}
-function setTimer(m){pauseTimer();seconds=totalSeconds=m*60;$('mode').textContent='دراسة';paint()}
-function setBreak(){pauseTimer();seconds=totalSeconds=600;$('mode').textContent='استراحة';paint()}
-function startTimer(){if(running)return;running=true;$('start').textContent='يعمل...';timer=setInterval(()=>{seconds--;paint();if(seconds<=0){clearInterval(timer);timer=null;running=false;$('start').textContent='ابدأ الجلسة';if($('mode').textContent==='دراسة'){stats.minutes+=Math.round(totalSeconds/60);stats.sessions++;save();render();alert('انتهت جلسة الدراسة 🎉 ممتااااز!');setBreak()}else{alert('انتهت الاستراحة، عد لإكمال المسار!');setTimer(50)}}},1000)}
+function setTimer(m){initAudio();pauseTimer();seconds=totalSeconds=m*60;$('mode').textContent='دراسة';paint()}
+function setBreak(){initAudio();pauseTimer();seconds=totalSeconds=600;$('mode').textContent='استراحة';paint()}
+
+function startTimer(){
+  initAudio(); if(running)return; running=true; $('start').textContent='يعمل...';
+  timer=setInterval(()=>{
+    seconds--; paint();
+    if(seconds<=0){
+      clearInterval(timer); timer=null; running=false; $('start').textContent='ابدأ الجلسة';
+      if($('mode').textContent==='دراسة'){
+        stats.minutes+=Math.round(totalSeconds/60); stats.sessions++; save(); render();
+        triggerCelebration('أكملت جلسة دراسية مركزة بنجاح! خذ استراحة واستعد للجولة القادمة.');
+        setBreak();
+      }else{ triggerCelebration('انتهت الاستراحة، عد لإكمال مسارك بثقة!'); setTimer(50); }
+    }
+  },1000);
+}
+
 function pauseTimer(){if(timer)clearInterval(timer);timer=null;running=false;$('start').textContent='استئناف'}
 function resetTimer(){pauseTimer();setTimer(50)}
-
-function toggleAudio(type){
-  if(type==='none'){ if(audioCtx) audioCtx.close(); audioCtx=null; return; }
-  if(!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-  let bufferSize = audioCtx.sampleRate * 2, noiseBuffer = audioCtx.createBuffer(1, bufferSize, audioCtx.sampleRate), output = noiseBuffer.getChannelData(0);
-  for (let i = 0; i < bufferSize; i++) { output[i] = Math.random() * 2 - 1; }
-  let whiteNoise = audioCtx.createBufferSource(); whiteNoise.buffer = noiseBuffer; whiteNoise.loop = true;
-  let gainNode = audioCtx.createGain(); gainNode.gain.value = 0.03;
-  whiteNoise.connect(gainNode); gainNode.connect(audioCtx.destination); whiteNoise.start();
-}
 
 function exportData(){
   let dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify({tasks,stats}));
@@ -342,6 +504,7 @@ function renderCalendar(){
  $('calendar').innerHTML=h
 }
 
+document.body.addEventListener('click', initAudio, { once: true });
 $('date').value=today();updateNow();setInterval(updateNow,1000);paint();render();
 </script>
 </body></html>
